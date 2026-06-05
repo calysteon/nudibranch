@@ -1,0 +1,35 @@
+# systemd unit for the Nudibranch server on a VPS (e.g. Hostinger).
+#
+# Install:
+#   sudo useradd --system --no-create-home --shell /usr/sbin/nologin nudibranch
+#   sudo mkdir -p /opt/nudibranch/data /var/lib/nudibranch
+#   sudo cp nudibranch /opt/nudibranch/                 # the compiled binary
+#   sudo cp data/*.json /opt/nudibranch/data/           # real, fetched data
+#   sudo chown -R nudibranch:nudibranch /opt/nudibranch /var/lib/nudibranch
+#   sudo cp deploy/nudibranch.service /etc/systemd/system/
+#   sudo systemctl daemon-reload && sudo systemctl enable --now nudibranch
+#
+# Then put nginx/Caddy in front for TLS and proxy to 127.0.0.1:8080.
+
+[Unit]
+Description=Nudibranch tidepool planner
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=nudibranch
+Group=nudibranch
+WorkingDirectory=/opt/nudibranch
+ExecStart=/opt/nudibranch/nudibranch -addr 127.0.0.1:8080 -data /opt/nudibranch/data -cache /var/lib/nudibranch/tidecache -region Seattle
+Restart=on-failure
+RestartSec=3
+
+# Hardening — the service only needs to read its dir and write the tide cache.
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/var/lib/nudibranch
+
+[Install]
+WantedBy=multi-user.target

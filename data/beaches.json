@@ -1,0 +1,83 @@
+[
+  {
+    "id": "alki",
+    "name": "Alki Beach",
+    "lat": 47.5763,
+    "lon": -122.4076,
+    "region": "Seattle",
+    "station": "9447130",
+    "blurb": "Long cobble-and-sand beach on Elliott Bay; easy access and reliable intertidal life."
+  },
+  {
+    "id": "goldengardens",
+    "name": "Golden Gardens Park",
+    "lat": 47.6917,
+    "lon": -122.4028,
+    "region": "Seattle",
+    "station": "9447130",
+    "blurb": "Sandy beach with rocky pockets near Shilshole; good for a casual low-tide wander."
+  },
+  {
+    "id": "carkeek",
+    "name": "Carkeek Park",
+    "lat": 47.7117,
+    "lon": -122.3782,
+    "region": "Seattle",
+    "station": "9447130",
+    "blurb": "Wide flats below the railroad; cobble and sand with tidepool patches at extreme lows."
+  },
+  {
+    "id": "richmond",
+    "name": "Richmond Beach Saltwater Park",
+    "lat": 47.7665,
+    "lon": -122.3927,
+    "region": "Seattle",
+    "station": "9447130",
+    "blurb": "Shoreline park with a broad gravel beach; classic Sound tidepooling spot."
+  },
+  {
+    "id": "lincoln",
+    "name": "Lincoln Park",
+    "lat": 47.5306,
+    "lon": -122.3960,
+    "region": "Seattle",
+    "station": "9447130",
+    "blurb": "West Seattle park with a long rocky/cobble shoreline rich in intertidal critters."
+  },
+  {
+    "id": "saltwater",
+    "name": "Saltwater State Park",
+    "lat": 47.3740,
+    "lon": -122.3225,
+    "region": "Seattle",
+    "station": "9447130",
+    "blurb": "Des Moines park with a sheltered cove; accessible tidepools at low water."
+  },
+  {
+    "id": "saltcreek",
+    "name": "Salt Creek Recreation Area",
+    "lat": 48.1620,
+    "lon": -123.7050,
+    "region": "Olympic Peninsula",
+    "station": "9444090",
+    "blurb": "Tongue Point Marine Sanctuary near Port Angeles — among the best tidepools in WA."
+  },
+  {
+    "id": "cattlepoint",
+    "name": "Cattle Point (San Juan Island)",
+    "lat": 48.4508,
+    "lon": -122.9637,
+    "region": "San Juan Islands",
+    "station": "9449880",
+    "blurb": "Rocky point at the south end of San Juan Island; strong currents, rich life."
+  },
+  {
+    "id": "larrabee",
+    "name": "Larrabee State Park",
+    "lat": 48.6515,
+    "lon": -122.4895,
+    "region": "Bellingham",
+    "station": "9449211",
+    "blurb": "Sandstone shelves on Samish Bay; tidepools tucked among the eroded rock."
+  }
+]

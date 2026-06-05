@@ -1,0 +1,7 @@
+# Build artifacts
+/nudibranch
+/fetch-inat
+*.exe
+
+# NOAA tide response cache
+/tidecache/

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nudibranch — Pacific Northwest tidepool planner</title>
+
+  <!-- Leaflet for the map. Loaded from CDN for now; see scripts/vendor.sh to
+       pull these files local for a fully self-hosted, no-CDN deploy. -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <h1>🐌 Nudibranch</h1>
+    <p class="tagline">Where the sea slugs are, when the tide is low and the sun is up.</p>
+    <form id="controls">
+      <label>Area
+        <select id="region" name="region">
+          {{range .Regions}}<option value="{{.}}"{{if eq . $.DefaultRegion}} selected{{end}}>{{.}}</option>{{end}}
+          <option value="all">All PNW</option>
+        </select>
+      </label>
+      <label>Date
+        <input type="date" id="date" name="date" value="{{.DefaultDate}}">
+      </label>
+      <button type="submit">Plan</button>
+    </form>
+    <p class="hint">Showing daylight low tides between {{printf "%02d" .WakeStart}}:00 and {{printf "%02d" .WakeEnd}}:00.</p>
+  </header>
+
+  <main>
+    <div id="map"></div>
+    <aside id="sidebar">
+      <div id="summary"></div>
+      <ul id="beach-list"></ul>
+    </aside>
+  </main>
+
+  <footer>
+    <span id="data-note"></span>
+    Tides via <a href="https://tidesandcurrents.noaa.gov/">NOAA CO-OPS</a> ·
+    Sightings via <a href="https://www.inaturalist.org/">iNaturalist</a>.
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

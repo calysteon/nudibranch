@@ -1,0 +1,82 @@
+{
+  "generatedAt": "sample data — run cmd/fetch-inat to replace with real iNaturalist observations",
+  "beaches": {
+    "alki": {
+      "6": [
+        {"commonName": "Opalescent nudibranch", "scientific": "Hermissenda crassicornis", "count": 38, "taxonId": 0},
+        {"commonName": "Clown nudibranch", "scientific": "Triopha catalinae", "count": 21, "taxonId": 0},
+        {"commonName": "Shaggy mouse nudibranch", "scientific": "Aeolidia loui", "count": 14, "taxonId": 0},
+        {"commonName": "Monterey dorid", "scientific": "Doris montereyensis", "count": 9, "taxonId": 0},
+        {"commonName": "Alabaster nudibranch", "scientific": "Dirona albolineata", "count": 6, "taxonId": 0}
+      ],
+      "4": [
+        {"commonName": "Barnacle-eating onchidoris", "scientific": "Onchidoris bilamellata", "count": 44, "taxonId": 0},
+        {"commonName": "Opalescent nudibranch", "scientific": "Hermissenda crassicornis", "count": 17, "taxonId": 0},
+        {"commonName": "Nanaimo dorid", "scientific": "Acanthodoris nanaimoensis", "count": 8, "taxonId": 0}
+      ],
+      "12": [
+        {"commonName": "Alabaster nudibranch", "scientific": "Dirona albolineata", "count": 11, "taxonId": 0},
+        {"commonName": "Opalescent nudibranch", "scientific": "Hermissenda crassicornis", "count": 7, "taxonId": 0}
+      ]
+    },
+    "goldengardens": {
+      "6": [
+        {"commonName": "Opalescent nudibranch", "scientific": "Hermissenda crassicornis", "count": 26, "taxonId": 0},
+        {"commonName": "Hooded nudibranch", "scientific": "Melibe leonina", "count": 12, "taxonId": 0},
+        {"commonName": "Clown nudibranch", "scientific": "Triopha catalinae", "count": 8, "taxonId": 0}
+      ]
+    },
+    "carkeek": {
+      "6": [
+        {"commonName": "Opalescent nudibranch", "scientific": "Hermissenda crassicornis", "count": 15, "taxonId": 0},
+        {"commonName": "Ring-spotted dorid", "scientific": "Diaulula sandiegensis", "count": 7, "taxonId": 0}
+      ]
+    },
+    "richmond": {
+      "6": [
+        {"commonName": "Opalescent nudibranch", "scientific": "Hermissenda crassicornis", "count": 19, "taxonId": 0},
+        {"commonName": "Monterey dorid", "scientific": "Doris montereyensis", "count": 10, "taxonId": 0},
+        {"commonName": "Yellow-edged cadlina", "scientific": "Cadlina luteomarginata", "count": 5, "taxonId": 0}
+      ]
+    },
+    "lincoln": {
+      "6": [
+        {"commonName": "Opalescent nudibranch", "scientific": "Hermissenda crassicornis", "count": 31, "taxonId": 0},
+        {"commonName": "Clown nudibranch", "scientific": "Triopha catalinae", "count": 18, "taxonId": 0},
+        {"commonName": "Red sponge dorid", "scientific": "Rostanga pulchra", "count": 6, "taxonId": 0},
+        {"commonName": "Alabaster nudibranch", "scientific": "Dirona albolineata", "count": 5, "taxonId": 0}
+      ]
+    },
+    "saltwater": {
+      "6": [
+        {"commonName": "Opalescent nudibranch", "scientific": "Hermissenda crassicornis", "count": 12, "taxonId": 0},
+        {"commonName": "Shaggy mouse nudibranch", "scientific": "Aeolidia loui", "count": 6, "taxonId": 0}
+      ]
+    },
+    "saltcreek": {
+      "6": [
+        {"commonName": "Clown nudibranch", "scientific": "Triopha catalinae", "count": 52, "taxonId": 0},
+        {"commonName": "Opalescent nudibranch", "scientific": "Hermissenda crassicornis", "count": 40, "taxonId": 0},
+        {"commonName": "Monterey dorid", "scientific": "Doris montereyensis", "count": 27, "taxonId": 0},
+        {"commonName": "Yellow-edged cadlina", "scientific": "Cadlina luteomarginata", "count": 19, "taxonId": 0},
+        {"commonName": "Sea lemon", "scientific": "Doris pseudoargus", "count": 14, "taxonId": 0},
+        {"commonName": "Alabaster nudibranch", "scientific": "Dirona albolineata", "count": 11, "taxonId": 0}
+      ]
+    },
+    "cattlepoint": {
+      "6": [
+        {"commonName": "Opalescent nudibranch", "scientific": "Hermissenda crassicornis", "count": 33, "taxonId": 0},
+        {"commonName": "Clown nudibranch", "scientific": "Triopha catalinae", "count": 22, "taxonId": 0},
+        {"commonName": "Hooded nudibranch", "scientific": "Melibe leonina", "count": 16, "taxonId": 0},
+        {"commonName": "Frosted nudibranch", "scientific": "Dirona aurantia", "count": 9, "taxonId": 0}
+      ]
+    },
+    "larrabee": {
+      "6": [
+        {"commonName": "Opalescent nudibranch", "scientific": "Hermissenda crassicornis", "count": 18, "taxonId": 0},
+        {"commonName": "Barnacle-eating onchidoris", "scientific": "Onchidoris bilamellata", "count": 10, "taxonId": 0},
+        {"commonName": "Nanaimo dorid", "scientific": "Acanthodoris nanaimoensis", "count": 7, "taxonId": 0}
+      ]
+    }
+  }
+}
