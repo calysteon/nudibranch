@@ -21,13 +21,12 @@ That's it. Every push to `main` rebuilds and republishes the site.
 
 Your site will be at:
 
-    https://calysteon.github.io/nudibranch.github.io/
+    https://calysteon.github.io/nudibranch/
 
-(This is a *project* site, so it lives at a subpath — the repo is owned by
-`calysteon`, not by an org named `nudibranch`. To get the root
-`https://nudibranch.github.io/` instead, the repo would need to be owned by a
-user/org literally named `nudibranch`. All asset paths are relative, so either
-works.)
+(This is a *project* site — the repo is `calysteon/nudibranch` — so it lives at
+the `/nudibranch/` subpath. All asset paths are relative, so that just works. A
+root `https://<name>.github.io/` URL is only possible if the repo is owned by a
+user or organization literally named `<name>`.)
 
 (The `Actions` tab shows each deploy; the green check links to the live URL.)
 
