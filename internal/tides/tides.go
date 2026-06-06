@@ -31,6 +31,16 @@ type LowTide struct {
 	Minus    bool    `json:"minus"`    // true for prized sub-zero ("minus") tides
 }
 
+// Extreme is a single high- or low-tide turning point for the day, used to
+// draw the tide curve. It spans the whole day, not just the waking window.
+type Extreme struct {
+	Time     string  `json:"time"`     // local clock time, "15:04"
+	Minutes  int     `json:"minutes"`  // minutes since local midnight (for plotting)
+	HeightFt float64 `json:"heightFt"` // height relative to MLLW datum
+	Kind     string  `json:"kind"`     // "H" or "L"
+	Minus    bool    `json:"minus"`    // true for sub-zero lows
+}
+
 // Client fetches and caches tide predictions.
 type Client struct {
 	http     *http.Client
@@ -64,10 +74,10 @@ type noaaResponse struct {
 	} `json:"error"`
 }
 
-// DaylightLowTides returns the low tides for the given station and date
-// (YYYY-MM-DD) that fall within [wakeStart, wakeEnd) local hours, sorted by
-// height (lowest/best first).
-func (c *Client) DaylightLowTides(ctx context.Context, station, date string, wakeStart, wakeEnd int) ([]LowTide, error) {
+// DayExtremes returns every high/low turning point for the given station and
+// date (YYYY-MM-DD), in chronological order. This is the raw material for both
+// the tide curve and the daylight-low filter.
+func (c *Client) DayExtremes(ctx context.Context, station, date string) ([]Extreme, error) {
 	raw, err := c.rawPredictions(ctx, station, date)
 	if err != nil {
 		return nil, err
@@ -80,30 +90,63 @@ func (c *Client) DaylightLowTides(ctx context.Context, station, date string, wak
 		return nil, fmt.Errorf("noaa error for station %s: %s", station, resp.Error.Message)
 	}
 
-	var out []LowTide
+	var out []Extreme
 	for _, p := range resp.Predictions {
-		if p.Type != "L" {
-			continue
-		}
 		// p.T is local station time, e.g. "2026-06-05 14:32".
 		parts := strings.Fields(p.T)
 		if len(parts) != 2 {
 			continue
 		}
 		hm := strings.SplitN(parts[1], ":", 2)
-		hour, err := strconv.Atoi(hm[0])
-		if err != nil || hour < wakeStart || hour >= wakeEnd {
+		if len(hm) != 2 {
+			continue
+		}
+		hour, err1 := strconv.Atoi(hm[0])
+		min, err2 := strconv.Atoi(hm[1])
+		if err1 != nil || err2 != nil {
 			continue
 		}
 		height, _ := strconv.ParseFloat(p.V, 64)
-		out = append(out, LowTide{
+		out = append(out, Extreme{
 			Time:     parts[1],
+			Minutes:  hour*60 + min,
 			HeightFt: height,
-			Minus:    height < 0,
+			Kind:     p.Type,
+			Minus:    p.Type == "L" && height < 0,
 		})
 	}
-	sort.Slice(out, func(i, j int) bool { return out[i].HeightFt < out[j].HeightFt })
+	sort.Slice(out, func(i, j int) bool { return out[i].Minutes < out[j].Minutes })
 	return out, nil
+}
+
+// DaylightLows filters a day's extremes to the low tides falling within
+// [wakeStart, wakeEnd) local hours, sorted by height (lowest/best first). It is
+// a pure function so callers that already hold the day's extremes (e.g. to draw
+// the curve) don't pay for a second fetch.
+func DaylightLows(extremes []Extreme, wakeStart, wakeEnd int) []LowTide {
+	var out []LowTide
+	for _, e := range extremes {
+		if e.Kind != "L" {
+			continue
+		}
+		hour := e.Minutes / 60
+		if hour < wakeStart || hour >= wakeEnd {
+			continue
+		}
+		out = append(out, LowTide{Time: e.Time, HeightFt: e.HeightFt, Minus: e.Minus})
+	}
+	sort.Slice(out, func(i, j int) bool { return out[i].HeightFt < out[j].HeightFt })
+	return out
+}
+
+// DaylightLowTides returns the low tides for the given station and date that
+// fall within [wakeStart, wakeEnd) local hours, sorted by height (lowest first).
+func (c *Client) DaylightLowTides(ctx context.Context, station, date string, wakeStart, wakeEnd int) ([]LowTide, error) {
+	extremes, err := c.DayExtremes(ctx, station, date)
+	if err != nil {
+		return nil, err
+	}
+	return DaylightLows(extremes, wakeStart, wakeEnd), nil
 }
 
 // rawPredictions returns the raw NOAA JSON body, using the on-disk cache when

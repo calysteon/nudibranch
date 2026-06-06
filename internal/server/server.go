@@ -92,6 +92,7 @@ type planBeach struct {
 	beaches.Beach
 	LowTides   []tides.LowTide   `json:"lowTides"`
 	BestTide   *tides.LowTide    `json:"bestTide"`
+	AllTides   []tides.Extreme   `json:"allTides"` // full day's highs+lows for the curve
 	HasLowTide bool              `json:"hasLowTide"`
 	Species    []species.Species `json:"species"`
 	TideError  string            `json:"tideError,omitempty"`
@@ -142,14 +143,18 @@ func (s *Server) handlePlan(w http.ResponseWriter, r *http.Request) {
 			defer func() { <-sem }()
 
 			entry := planBeach{Beach: b}
-			lows, err := s.cfg.Tides.DaylightLowTides(ctx, b.Station, date, s.cfg.WakeStart, s.cfg.WakeEnd)
+			extremes, err := s.cfg.Tides.DayExtremes(ctx, b.Station, date)
 			if err != nil {
 				entry.TideError = err.Error()
-			} else if len(lows) > 0 {
-				entry.LowTides = lows
-				entry.BestTide = &lows[0] // already sorted lowest-first
-				entry.HasLowTide = true
-				entry.Species = s.cfg.Species.Likely(b.ID, month)
+			} else {
+				entry.AllTides = extremes
+				lows := tides.DaylightLows(extremes, s.cfg.WakeStart, s.cfg.WakeEnd)
+				if len(lows) > 0 {
+					entry.LowTides = lows
+					entry.BestTide = &lows[0] // already sorted lowest-first
+					entry.HasLowTide = true
+					entry.Species = s.cfg.Species.Likely(b.ID, month)
+				}
 			}
 			results[i] = entry
 		}(i, b)

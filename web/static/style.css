@@ -22,14 +22,50 @@ body {
 }
 
 header {
+  position: relative;
+  overflow: hidden;
   padding: 0.75rem 1rem;
   background: var(--sea-deep);
   color: var(--sand);
 }
-header h1 { margin: 0; font-size: 1.4rem; }
-.tagline { margin: 0.1rem 0 0.6rem; opacity: 0.85; font-size: 0.9rem; }
+
+/* Decorative banner: a faint row of hand-drawn sea slugs behind the title. */
+.banner-art {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 1.5rem;
+  padding: 0 4rem 0 0;
+  opacity: 0.16;
+  pointer-events: none;
+  overflow: hidden;
+}
+.banner-art img { height: 78%; width: auto; object-fit: contain; filter: saturate(1.1); }
+
+.corner-logo {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.8rem;
+  height: 58px;
+  width: 58px;
+  object-fit: cover;
+  border-radius: 50%;
+  background: var(--sand);
+  padding: 3px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+  z-index: 2;
+}
+
+.brand { position: relative; z-index: 1; margin-bottom: 0.6rem; }
+.brand h1 { margin: 0; font-size: 1.5rem; font-weight: 700; letter-spacing: 0.01em; line-height: 1.1;
+  text-shadow: 0 1px 4px rgba(10,71,83,0.6); }
+.brand-sub { font-weight: 400; opacity: 0.9; font-style: italic; }
 
 #controls {
+  position: relative;
+  z-index: 1;
   display: flex;
   gap: 0.75rem;
   align-items: flex-end;
@@ -49,8 +85,30 @@ header h1 { margin: 0; font-size: 1.4rem; }
   cursor: pointer;
   font-weight: 600;
 }
-#controls button:hover { filter: brightness(1.05); }
-.hint { margin: 0.5rem 0 0; font-size: 0.75rem; opacity: 0.8; }
+#controls button[type="submit"] {
+  background: var(--coral);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+#controls button[type="submit"]:hover { filter: brightness(1.05); }
+
+/* Segmented Beach / Slug view toggle. */
+.viewtoggle { display: inline-flex; border-radius: 7px; overflow: hidden; border: 1px solid var(--sea); align-self: flex-end; }
+.viewtoggle .vt {
+  font-size: 0.85rem;
+  padding: 0.42rem 0.7rem;
+  border: none;
+  background: rgba(255,255,255,0.92);
+  color: var(--sea-deep);
+  cursor: pointer;
+  font-weight: 600;
+}
+.viewtoggle .vt + .vt { border-left: 1px solid var(--sea); }
+.viewtoggle .vt.active { background: var(--sea); color: #fff; }
+
+.hint { position: relative; z-index: 1; margin: 0.5rem 0 0; font-size: 0.75rem; opacity: 0.85; }
 
 main { flex: 1; display: flex; min-height: 0; }
 #map { flex: 2; min-width: 0; }
@@ -73,8 +131,9 @@ main { flex: 1; display: flex; min-height: 0; }
   padding: 0.7rem 0.8rem;
   margin-bottom: 0.6rem;
 }
-.beach.no-tide { opacity: 0.6; }
-.beach h3 { margin: 0 0 0.2rem; font-size: 1.05rem; }
+.beach.no-tide { opacity: 0.62; }
+.beach h3 { margin: 0 0 0.2rem; font-size: 1.05rem; display: flex; align-items: center; gap: 0.4rem; }
+.swatch { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 0 0 1px rgba(0,0,0,0.15); }
 .beach .blurb { margin: 0 0 0.4rem; font-size: 0.8rem; color: #555; }
 
 .tides { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.3rem 0; }
@@ -88,11 +147,67 @@ main { flex: 1; display: flex; min-height: 0; }
 }
 .tide.minus { background: var(--minus); }
 
-.species { list-style: none; margin: 0.4rem 0 0; padding: 0; }
-.species li { font-size: 0.85rem; padding: 0.1rem 0; }
-.species .sci { font-style: italic; color: #666; }
-.species .count { color: var(--sea); font-variant-numeric: tabular-nums; }
-.species a { color: inherit; text-decoration: none; border-bottom: 1px dotted var(--sea); }
+/* --- tide curve --- */
+.tide-chart { margin: 0.5rem 0 0.3rem; }
+.tide-chart svg { width: 100%; height: auto; display: block; }
+.tc-fill { fill: rgba(17,112,127,0.12); }
+.tc-line { fill: none; stroke: var(--sea); stroke-width: 2; }
+.tc-day { fill: rgba(245,209,102,0.18); }
+.tc-zero { stroke: #bbb; stroke-width: 1; stroke-dasharray: 3 3; }
+.tc-now { stroke: var(--coral); stroke-width: 1.5; }
+.tc-dot { fill: var(--sea); }
+.tc-dot.low { fill: var(--sea-deep); }
+.tc-dot.minus { fill: var(--minus); }
+.tc-label { font-size: 9px; fill: #44606a; font-variant-numeric: tabular-nums; }
+.tc-axis { font-size: 8px; fill: #99a; }
+
+/* --- high/low time table --- */
+.tide-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; margin-top: 0.2rem; }
+.tide-table td { padding: 0.12rem 0.3rem; border-top: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+.tide-table .kind { font-weight: 600; color: var(--sea); width: 3.2rem; }
+.tide-table .kind.low { color: var(--sea-deep); }
+.tide-table .kind.minus { color: var(--minus); }
+.tide-table .ht { text-align: right; color: #555; }
+.tide-table tr.is-low td { background: rgba(17,112,127,0.05); }
+.tide-table tr.is-minus td { background: rgba(184,50,74,0.07); }
+
+/* --- species list with thumbnails --- */
+.species { list-style: none; margin: 0.5rem 0 0; padding: 0; display: flex; flex-direction: column; gap: 0.35rem; }
+.sp { display: flex; align-items: center; gap: 0.55rem; }
+.sp-photo { flex-shrink: 0; line-height: 0; }
+.sp-photo img {
+  width: 46px; height: 46px; object-fit: cover; border-radius: 8px;
+  background: #e8e2d2; border: 1px solid var(--line);
+}
+.sp-text { display: flex; flex-direction: column; min-width: 0; flex: 1; }
+.sp-name { font-size: 0.88rem; font-weight: 600; color: var(--ink); text-decoration: none; }
+.sp-name:hover { color: var(--sea); }
+.sp-sci { font-style: italic; font-size: 0.76rem; color: #777; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.sp-count {
+  flex-shrink: 0; font-variant-numeric: tabular-nums; font-size: 0.78rem; font-weight: 600;
+  color: var(--sea-deep); background: rgba(17,112,127,0.1); border-radius: 10px; padding: 0.1rem 0.5rem;
+}
+
+/* --- slug map pins (slug view) --- */
+.slug-pin-wrap { background: none; border: none; }
+.slug-pin {
+  width: 38px; height: 38px; border-radius: 50%; overflow: hidden;
+  border: 3px solid var(--sea); background: #fff; position: relative;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+}
+.slug-pin img { width: 100%; height: 100%; object-fit: cover; }
+.slug-pin-count {
+  position: absolute; bottom: -2px; right: -2px;
+  font-size: 9px; font-weight: 700; line-height: 1;
+  background: var(--sea-deep); color: #fff; border: 1px solid #fff;
+  border-radius: 8px; padding: 1px 3px; font-variant-numeric: tabular-nums;
+}
+.slug-pop { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.15rem; }
+.slug-pop img { width: 92px; height: 92px; object-fit: cover; border-radius: 8px; margin-bottom: 0.25rem; }
+.slug-pop strong { font-size: 0.92rem; }
+.slug-pop em { font-size: 0.78rem; color: #666; }
+.slug-pop span { font-size: 0.78rem; color: #444; }
+.slug-pop a { font-size: 0.8rem; color: var(--sea); margin-top: 0.2rem; }
 
 .none { font-size: 0.8rem; color: #888; }
 .err { font-size: 0.75rem; color: var(--coral); }
@@ -105,3 +220,48 @@ footer {
 }
 footer a { color: #ffd9b3; }
 #data-note { display: block; opacity: 0.75; margin-bottom: 0.15rem; }
+
+/* ---------- mobile / iOS ---------- */
+html { -webkit-text-size-adjust: 100%; }
+body {
+  height: 100vh;
+  height: 100dvh; /* avoid iOS Safari toolbar overlap */
+  padding-bottom: env(safe-area-inset-bottom);
+}
+#sidebar { -webkit-overflow-scrolling: touch; }
+
+@media (max-width: 760px) {
+  body { height: auto; min-height: 100dvh; }
+  main { flex-direction: column; flex: none; }
+  #map { flex: none; height: 52vh; min-height: 280px; width: 100%; }
+  #sidebar {
+    flex: none;
+    max-width: none;
+    width: 100%;
+    border-left: none;
+    border-top: 1px solid var(--line);
+    overflow-y: visible;
+  }
+
+  .corner-logo { height: 46px; width: 46px; top: 0.5rem; right: 0.5rem; }
+  .brand h1 { font-size: 1.25rem; padding-right: 3rem; }
+  .banner-art { padding-right: 3rem; opacity: 0.13; }
+
+  #controls { gap: 0.5rem; }
+  #controls label { flex: 1 1 8rem; }
+  #controls select, #controls input { width: 100%; }
+  #controls button[type="submit"] { flex: 1 1 5rem; min-height: 44px; }
+  .viewtoggle { width: 100%; }
+  .viewtoggle .vt { flex: 1; min-height: 44px; }
+
+  .sp-photo img { width: 52px; height: 52px; }
+  .sp-name { font-size: 0.95rem; }
+  .sp-sci { font-size: 0.82rem; }
+  .tide-table { font-size: 0.85rem; }
+  .leaflet-popup-content { margin: 0.6rem 0.7rem; }
+}
+
+@media (hover: none) {
+  /* larger touch targets for species links */
+  .sp { padding: 0.1rem 0; }
+}

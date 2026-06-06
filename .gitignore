@@ -5,3 +5,6 @@
 
 # NOAA tide response cache
 /tidecache/
+
+# Local, machine-specific Claude settings (keep launch.json shared)
+/.claude/settings.local.json

@@ -5,8 +5,35 @@
     "lat": 47.5763,
     "lon": -122.4076,
     "region": "Seattle",
-    "station": "9447130",
+    "station": "9447110",
     "blurb": "Long cobble-and-sand beach on Elliott Bay; easy access and reliable intertidal life."
+  },
+  {
+    "id": "constellation",
+    "name": "Constellation Park",
+    "lat": 47.5772,
+    "lon": -122.4112,
+    "region": "Seattle",
+    "station": "9447110",
+    "blurb": "Rocky reef beach below Alki Point lighthouse; excellent low-tide invertebrate diversity."
+  },
+  {
+    "id": "lincoln",
+    "name": "Lincoln Park",
+    "lat": 47.5306,
+    "lon": -122.396,
+    "region": "Seattle",
+    "station": "9446025",
+    "blurb": "West Seattle park with a long rocky/cobble shoreline rich in intertidal critters."
+  },
+  {
+    "id": "discovery",
+    "name": "Discovery Park / West Point",
+    "lat": 47.661,
+    "lon": -122.4357,
+    "region": "Seattle",
+    "station": "9447265",
+    "blurb": "Sandy and cobble beaches below the bluff at the city's largest park."
   },
   {
     "id": "goldengardens",
@@ -14,7 +41,7 @@
     "lat": 47.6917,
     "lon": -122.4028,
     "region": "Seattle",
-    "station": "9447130",
+    "station": "9447265",
     "blurb": "Sandy beach with rocky pockets near Shilshole; good for a casual low-tide wander."
   },
   {
@@ -23,7 +50,7 @@
     "lat": 47.7117,
     "lon": -122.3782,
     "region": "Seattle",
-    "station": "9447130",
+    "station": "9447265",
     "blurb": "Wide flats below the railroad; cobble and sand with tidepool patches at extreme lows."
   },
   {
@@ -32,44 +59,386 @@
     "lat": 47.7665,
     "lon": -122.3927,
     "region": "Seattle",
-    "station": "9447130",
+    "station": "9447427",
     "blurb": "Shoreline park with a broad gravel beach; classic Sound tidepooling spot."
   },
   {
-    "id": "lincoln",
-    "name": "Lincoln Park",
-    "lat": 47.5306,
-    "lon": -122.3960,
+    "id": "seahurst",
+    "name": "Seahurst Park",
+    "lat": 47.473,
+    "lon": -122.364,
     "region": "Seattle",
-    "station": "9447130",
-    "blurb": "West Seattle park with a long rocky/cobble shoreline rich in intertidal critters."
+    "station": "9447029",
+    "blurb": "Burien park with a restored beach and a marine education center; gentle flats."
   },
   {
     "id": "saltwater",
     "name": "Saltwater State Park",
-    "lat": 47.3740,
+    "lat": 47.374,
     "lon": -122.3225,
     "region": "Seattle",
-    "station": "9447130",
+    "station": "9446248",
     "blurb": "Des Moines park with a sheltered cove; accessible tidepools at low water."
   },
   {
-    "id": "saltcreek",
-    "name": "Salt Creek Recreation Area",
-    "lat": 48.1620,
-    "lon": -123.7050,
-    "region": "Olympic Peninsula",
-    "station": "9444090",
-    "blurb": "Tongue Point Marine Sanctuary near Port Angeles — among the best tidepools in WA."
+    "id": "desmoines",
+    "name": "Des Moines Beach Park",
+    "lat": 47.403,
+    "lon": -122.327,
+    "region": "Seattle",
+    "station": "9446248",
+    "blurb": "Creek-mouth beach park just north of the marina; easy family tidepooling."
+  },
+  {
+    "id": "redondo",
+    "name": "Redondo Beach",
+    "lat": 47.346,
+    "lon": -122.327,
+    "region": "Seattle",
+    "station": "9446248",
+    "blurb": "Boardwalk beach in Des Moines with a MaST aquarium and gentle intertidal flats."
+  },
+  {
+    "id": "dashpoint",
+    "name": "Dash Point State Park",
+    "lat": 47.317,
+    "lon": -122.408,
+    "region": "South Sound",
+    "station": "9446484",
+    "blurb": "Sandy beach with broad warm-water flats on the Federal Way shoreline."
+  },
+  {
+    "id": "owen",
+    "name": "Owen Beach (Point Defiance)",
+    "lat": 47.309,
+    "lon": -122.535,
+    "region": "South Sound",
+    "station": "9446375",
+    "blurb": "Tacoma's Point Defiance shoreline; gravel beach with views of Vashon."
+  },
+  {
+    "id": "titlow",
+    "name": "Titlow Beach",
+    "lat": 47.258,
+    "lon": -122.552,
+    "region": "South Sound",
+    "station": "9446486",
+    "blurb": "Tacoma beach by the Narrows with a tide-fed lagoon and rich rocky intertidal."
+  },
+  {
+    "id": "kopachuck",
+    "name": "Kopachuck State Park",
+    "lat": 47.311,
+    "lon": -122.685,
+    "region": "South Sound",
+    "station": "9446451",
+    "blurb": "Carr Inlet park with a long beach; clam flats and sea stars at low tide."
+  },
+  {
+    "id": "penrose",
+    "name": "Penrose Point State Park",
+    "lat": 47.254,
+    "lon": -122.744,
+    "region": "South Sound",
+    "station": "9446500",
+    "blurb": "Key Peninsula park with sandspits and warm shallow flats on Mayo Cove."
+  },
+  {
+    "id": "joemma",
+    "name": "Joemma Beach State Park",
+    "lat": 47.223,
+    "lon": -122.81,
+    "region": "South Sound",
+    "station": "9446638",
+    "blurb": "Quiet Key Peninsula beach on Case Inlet with tideflats and a dock."
+  },
+  {
+    "id": "tolmie",
+    "name": "Tolmie State Park",
+    "lat": 47.124,
+    "lon": -122.771,
+    "region": "South Sound",
+    "station": "9446671",
+    "blurb": "Olympia-area underwater park with sandy flats and an artificial reef."
+  },
+  {
+    "id": "burfoot",
+    "name": "Burfoot Park",
+    "lat": 47.137,
+    "lon": -122.907,
+    "region": "South Sound",
+    "station": "9446800",
+    "blurb": "Thurston County park on Budd Inlet with a forested bluff and beach access."
+  },
+  {
+    "id": "priestpoint",
+    "name": "Squaxin (Priest Point) Park",
+    "lat": 47.076,
+    "lon": -122.892,
+    "region": "South Sound",
+    "station": "9446969",
+    "blurb": "Olympia city park on Budd Inlet with estuary trails and a soft-bottom beach."
+  },
+  {
+    "id": "twanoh",
+    "name": "Twanoh State Park",
+    "lat": 47.378,
+    "lon": -123.0,
+    "region": "Kitsap & Hood Canal",
+    "station": "9445478",
+    "blurb": "Warm Hood Canal park famous for oysters and clams on a gentle south-shore beach."
+  },
+  {
+    "id": "potlatch",
+    "name": "Potlatch State Park",
+    "lat": 47.362,
+    "lon": -123.157,
+    "region": "Kitsap & Hood Canal",
+    "station": "9445478",
+    "blurb": "Lower Hood Canal park with broad tideflats prized for shellfish."
+  },
+  {
+    "id": "manchester",
+    "name": "Manchester State Park",
+    "lat": 47.579,
+    "lon": -122.546,
+    "region": "Kitsap & Hood Canal",
+    "station": "9445938",
+    "blurb": "Former fort on Rich Passage with a pebbly beach and strong tidal currents."
+  },
+  {
+    "id": "fortward",
+    "name": "Fort Ward Park",
+    "lat": 47.579,
+    "lon": -122.529,
+    "region": "Kitsap & Hood Canal",
+    "station": "9445938",
+    "blurb": "Bainbridge park on Rich Passage; rocky shoreline and good shore diving."
+  },
+  {
+    "id": "faybainbridge",
+    "name": "Fay Bainbridge Park",
+    "lat": 47.703,
+    "lon": -122.488,
+    "region": "Kitsap & Hood Canal",
+    "station": "9445753",
+    "blurb": "North Bainbridge beach facing the main basin; driftwood and sandy gravel."
+  },
+  {
+    "id": "illahee",
+    "name": "Illahee State Park",
+    "lat": 47.603,
+    "lon": -122.595,
+    "region": "Kitsap & Hood Canal",
+    "station": "9445901",
+    "blurb": "Port Orchard reach park with a saltwater beach and old-growth forest."
+  },
+  {
+    "id": "scenicbeach",
+    "name": "Scenic Beach State Park",
+    "lat": 47.647,
+    "lon": -122.865,
+    "region": "Kitsap & Hood Canal",
+    "station": "9445303",
+    "blurb": "Seabeck park on Hood Canal with oysters and Olympic Mountain views."
+  },
+  {
+    "id": "kitsapmemorial",
+    "name": "Kitsap Memorial State Park",
+    "lat": 47.817,
+    "lon": -122.647,
+    "region": "Kitsap & Hood Canal",
+    "station": "9445088",
+    "blurb": "Hood Canal park north of Poulsbo with a gravel beach and tideflats."
+  },
+  {
+    "id": "pointnopoint",
+    "name": "Point No Point",
+    "lat": 47.912,
+    "lon": -122.526,
+    "region": "Kitsap & Hood Canal",
+    "station": "9445526",
+    "blurb": "Hansville lighthouse point; cobble beach and a productive low-tide reef."
+  },
+  {
+    "id": "foulweather",
+    "name": "Foulweather Bluff Preserve",
+    "lat": 47.929,
+    "lon": -122.623,
+    "region": "Kitsap & Hood Canal",
+    "station": "9445016",
+    "blurb": "Nature Conservancy preserve at the mouth of Hood Canal; wild beach and lagoon."
+  },
+  {
+    "id": "edmonds",
+    "name": "Brackett's Landing (Edmonds)",
+    "lat": 47.812,
+    "lon": -122.383,
+    "region": "North Sound",
+    "station": "9447427",
+    "blurb": "Underwater park beside the ferry; an artificial reef alive with marine life."
+  },
+  {
+    "id": "picnicpoint",
+    "name": "Picnic Point Park",
+    "lat": 47.887,
+    "lon": -122.328,
+    "region": "North Sound",
+    "station": "9447814",
+    "blurb": "Edmonds-area beach park beneath the bluff with a pedestrian rail overpass."
+  },
+  {
+    "id": "mukilteo",
+    "name": "Mukilteo Lighthouse Park",
+    "lat": 47.947,
+    "lon": -122.305,
+    "region": "North Sound",
+    "station": "9447814",
+    "blurb": "Beach park by the ferry dock with cobble flats and a historic lighthouse."
+  },
+  {
+    "id": "howarth",
+    "name": "Howarth Park",
+    "lat": 47.983,
+    "lon": -122.247,
+    "region": "North Sound",
+    "station": "9447659",
+    "blurb": "Everett park with a footbridge over the tracks to a driftwood beach."
+  },
+  {
+    "id": "kayakpoint",
+    "name": "Kayak Point Regional Park",
+    "lat": 48.137,
+    "lon": -122.367,
+    "region": "North Sound",
+    "station": "9448094",
+    "blurb": "Snohomish County park on Port Susan with a long sandy beach and pier."
+  },
+  {
+    "id": "doublebluff",
+    "name": "Double Bluff Beach",
+    "lat": 47.975,
+    "lon": -122.534,
+    "region": "Whidbey & Fidalgo",
+    "station": "9447855",
+    "blurb": "Long sandy spit on south Whidbey with towering bluffs and broad low-tide flats."
+  },
+  {
+    "id": "fortcasey",
+    "name": "Fort Casey State Park",
+    "lat": 48.162,
+    "lon": -122.68,
+    "region": "Whidbey & Fidalgo",
+    "station": "9447905",
+    "blurb": "Admiralty Inlet fort with a lighthouse and a cobble beach in swift current."
+  },
+  {
+    "id": "ebeys",
+    "name": "Ebey's Landing",
+    "lat": 48.196,
+    "lon": -122.71,
+    "region": "Whidbey & Fidalgo",
+    "station": "9447929",
+    "blurb": "Bluff-trail beach on the open Strait; surf-washed cobble and sand."
+  },
+  {
+    "id": "josephwhidbey",
+    "name": "Joseph Whidbey State Park",
+    "lat": 48.314,
+    "lon": -122.728,
+    "region": "Whidbey & Fidalgo",
+    "station": "9447951",
+    "blurb": "West Whidbey park with one of the island's best sandy beaches."
+  },
+  {
+    "id": "rosario",
+    "name": "Rosario Beach (Deception Pass)",
+    "lat": 48.401,
+    "lon": -122.658,
+    "region": "Whidbey & Fidalgo",
+    "station": "9448614",
+    "blurb": "Deception Pass cove with rocky reefs and a Marine Health Observation Area."
+  },
+  {
+    "id": "camano",
+    "name": "Camano Island State Park",
+    "lat": 48.123,
+    "lon": -122.487,
+    "region": "Whidbey & Fidalgo",
+    "station": "9447883",
+    "blurb": "Saratoga Passage park with a rocky beach and clam-digging flats."
+  },
+  {
+    "id": "camabeach",
+    "name": "Cama Beach State Park",
+    "lat": 48.143,
+    "lon": -122.516,
+    "region": "Whidbey & Fidalgo",
+    "station": "9447883",
+    "blurb": "Historic camp on Camano with a gentle beach on Saratoga Passage."
+  },
+  {
+    "id": "washingtonpark",
+    "name": "Washington Park (Anacortes)",
+    "lat": 48.497,
+    "lon": -122.694,
+    "region": "Whidbey & Fidalgo",
+    "station": "9448772",
+    "blurb": "Fidalgo Island park with rocky shoreline, tidepools, and a loop drive."
   },
   {
     "id": "cattlepoint",
     "name": "Cattle Point (San Juan Island)",
-    "lat": 48.4508,
-    "lon": -122.9637,
+    "lat": 48.4515,
+    "lon": -122.9636,
+    "region": "San Juan Islands",
+    "station": "9449982",
+    "blurb": "Rocky point at the south end of San Juan Island; strong currents, rich life."
+  },
+  {
+    "id": "southbeach",
+    "name": "South Beach (San Juan Island NHP)",
+    "lat": 48.458,
+    "lon": -123.044,
+    "region": "San Juan Islands",
+    "station": "9449856",
+    "blurb": "The island's longest public beach; driftwood, sand, and open-Strait exposure."
+  },
+  {
+    "id": "limekiln",
+    "name": "Lime Kiln Point State Park",
+    "lat": 48.516,
+    "lon": -123.152,
+    "region": "San Juan Islands",
+    "station": "9449856",
+    "blurb": "Whale-watch park on Haro Strait with rocky shore and a small lighthouse."
+  },
+  {
+    "id": "jacksonbeach",
+    "name": "Jackson Beach (Friday Harbor)",
+    "lat": 48.53,
+    "lon": -123.015,
     "region": "San Juan Islands",
     "station": "9449880",
-    "blurb": "Rocky point at the south end of San Juan Island; strong currents, rich life."
+    "blurb": "Sheltered Friday Harbor beach with a lagoon and easy intertidal access."
+  },
+  {
+    "id": "spencerspit",
+    "name": "Spencer Spit State Park",
+    "lat": 48.535,
+    "lon": -122.862,
+    "region": "San Juan Islands",
+    "station": "9449911",
+    "blurb": "Lopez Island sandspit enclosing a saltwater lagoon; clams and shorebirds."
+  },
+  {
+    "id": "odlin",
+    "name": "Odlin County Park",
+    "lat": 48.566,
+    "lon": -122.887,
+    "region": "San Juan Islands",
+    "station": "9449911",
+    "blurb": "Lopez Island park near the ferry with a long sandy beach on the channel."
   },
   {
     "id": "larrabee",
@@ -79,5 +448,104 @@
     "region": "Bellingham",
     "station": "9449211",
     "blurb": "Sandstone shelves on Samish Bay; tidepools tucked among the eroded rock."
+  },
+  {
+    "id": "marinepark",
+    "name": "Marine Park (Bellingham)",
+    "lat": 48.721,
+    "lon": -122.507,
+    "region": "Bellingham",
+    "station": "9449211",
+    "blurb": "Fairhaven waterfront park with a pebble beach on Bellingham Bay."
+  },
+  {
+    "id": "locustbeach",
+    "name": "Locust Beach",
+    "lat": 48.756,
+    "lon": -122.482,
+    "region": "Bellingham",
+    "station": "9449211",
+    "blurb": "North Bellingham beach below the bluff with broad sandy low-tide flats."
+  },
+  {
+    "id": "birchbay",
+    "name": "Birch Bay State Park",
+    "lat": 48.902,
+    "lon": -122.761,
+    "region": "Bellingham",
+    "station": "9449424",
+    "blurb": "Shallow warm bay near Blaine with extensive clam and crab flats."
+  },
+  {
+    "id": "semiahmoo",
+    "name": "Semiahmoo Park",
+    "lat": 48.8,
+    "lon": -122.76,
+    "region": "Bellingham",
+    "station": "9449292",
+    "blurb": "Sandspit park near Blaine separating the bay from Semiahmoo's harbor."
+  },
+  {
+    "id": "saltcreek",
+    "name": "Salt Creek Recreation Area",
+    "lat": 48.162,
+    "lon": -123.705,
+    "region": "Olympic Peninsula",
+    "station": "9443826",
+    "blurb": "Tongue Point Marine Sanctuary near Port Angeles \u2014 among the best tidepools in WA."
+  },
+  {
+    "id": "freshwaterbay",
+    "name": "Freshwater Bay",
+    "lat": 48.149,
+    "lon": -123.608,
+    "region": "Olympic Peninsula",
+    "station": "9443826",
+    "blurb": "County park west of Port Angeles with a cobble beach and kelp-fringed reefs."
+  },
+  {
+    "id": "fortworden",
+    "name": "Fort Worden State Park",
+    "lat": 48.135,
+    "lon": -122.766,
+    "region": "Olympic Peninsula",
+    "station": "9444900",
+    "blurb": "Port Townsend fort with a science center, lighthouse, and long Strait beach."
+  },
+  {
+    "id": "northbeach",
+    "name": "North Beach (Port Townsend)",
+    "lat": 48.123,
+    "lon": -122.78,
+    "region": "Olympic Peninsula",
+    "station": "9444900",
+    "blurb": "Driftwood beach facing Admiralty Inlet with views to Whidbey and the Cascades."
+  },
+  {
+    "id": "fortflagler",
+    "name": "Fort Flagler State Park",
+    "lat": 48.092,
+    "lon": -122.69,
+    "region": "Olympic Peninsula",
+    "station": "9444972",
+    "blurb": "Marrowstone Island fort with sandspits and broad flats at the bay mouth."
+  },
+  {
+    "id": "dungeness",
+    "name": "Dungeness Spit (NWR)",
+    "lat": 48.143,
+    "lon": -123.108,
+    "region": "Olympic Peninsula",
+    "station": "9444471",
+    "blurb": "One of the world's longest natural sandspits; a wildlife refuge with vast flats."
+  },
+  {
+    "id": "sequimbay",
+    "name": "Sequim Bay State Park",
+    "lat": 48.038,
+    "lon": -123.033,
+    "region": "Olympic Peninsula",
+    "station": "9444555",
+    "blurb": "Sheltered Sequim Bay park with a protected beach behind a natural spit."
   }
 ]
