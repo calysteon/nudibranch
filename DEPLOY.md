@@ -3,7 +3,7 @@
 This site is **fully static**: the beach and species datasets are plain JSON
 files, and tide predictions are fetched in the browser straight from NOAA's
 free, keyless, CORS-enabled API. There is **no server to run** and **no usage
-billing** — GitHub Pages serves it for free, and the worst case for a traffic
+billing** - GitHub Pages serves it for free, and the worst case for a traffic
 spike is that the CDN gets busy, never a surprise bill.
 
 ## One-time setup
@@ -11,7 +11,7 @@ spike is that the CDN gets busy, never a surprise bill.
 1. Push to `main` (the repo already has `.github/workflows/pages.yml`, which
    triggers on `main`).
 2. In the repo on github.com: **Settings → Pages → Build and deployment →
-   Source: GitHub Actions**.  (NOT "Deploy from a branch" — this site is
+   Source: GitHub Actions**.  (NOT "Deploy from a branch" - this site is
    assembled by the workflow, so a plain branch deploy would 404.)
 3. The repo must be **public** (or you need GitHub Pro for private Pages).
 4. On the **Actions** tab, open the latest "Deploy to GitHub Pages" run and
@@ -23,7 +23,7 @@ Your site will be at:
 
     https://calysteon.github.io/nudibranch/
 
-(This is a *project* site — the repo is `calysteon/nudibranch` — so it lives at
+(This is a *project* site - the repo is `calysteon/nudibranch` - so it lives at
 the `/nudibranch/` subpath. All asset paths are relative, so that just works. A
 root `https://<name>.github.io/` URL is only possible if the repo is owned by a
 user or organization literally named `<name>`.)
@@ -32,7 +32,7 @@ user or organization literally named `<name>`.)
 
 ## How a deploy works
 
-The workflow assembles a static bundle and publishes it — no Go build needed:
+The workflow assembles a static bundle and publishes it - no Go build needed:
 
     _site/
       index.html              # from web/templates/index.html
@@ -73,5 +73,5 @@ provisions HTTPS automatically. This is the only thing that ever costs money.
 
 - `species.json` (~1 MB) is fetched once per visit and gzipped by the CDN to
   ~150 KB; slug thumbnails (~7 KB each) load on demand.
-- The Go server in `cmd/server` is now optional — handy for local dev, but the
+- The Go server in `cmd/server` is now optional - handy for local dev, but the
   production site needs nothing but the static files.

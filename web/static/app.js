@@ -26,7 +26,7 @@ const tideSliderGroup = document.getElementById("tide-slider-group");
 const hourEnable = document.getElementById("tide-hour-enable");
 
 // View state. "slug" shows every sighting; "tide" shows only sightings at
-// beaches with a daylight low tide that day — or, if the hour filter is on,
+// beaches with a daylight low tide that day - or, if the hour filter is on,
 // only beaches whose tide is low at the scrubbed time.
 let viewMode = "slug";
 let currentPlan = null;
@@ -146,7 +146,7 @@ const SLUG_FALLBACK =
 function tideBadge(t) {
   const cls = t.minus ? "tide minus" : "tide";
   const ft = t.heightFt.toFixed(1);
-  return `<span class="${cls}" title="${t.minus ? "Minus tide — excellent" : "Low tide"}">${t.time} · ${ft} ft</span>`;
+  return `<span class="${cls}" title="${t.minus ? "Minus tide - excellent" : "Low tide"}">${t.time} · ${ft} ft</span>`;
 }
 
 function fmtTime(hhmm) {
@@ -249,7 +249,7 @@ function speciesList(species) {
     .map(
       (s) =>
         `<li class="sp">
-           <a class="sp-photo" href="${inatLink(s)}" target="_blank" rel="noopener" title="${s.commonName} — view on iNaturalist">
+           <a class="sp-photo" href="${inatLink(s)}" target="_blank" rel="noopener" title="${s.commonName} - view on iNaturalist">
              <img src="${slugImg(s.scientific)}" alt="${s.commonName}" loading="lazy"
                   onerror="this.onerror=null;this.src='${SLUG_FALLBACK}'">
            </a>
@@ -330,7 +330,7 @@ function render(plan) {
 
 // renderMarkers redraws the map for the active view. In slug view every beach's
 // sightings show; in tide view only beaches whose tide is low at the scrubbed
-// time keep their sightings — the rest fade to a faint dot.
+// time keep their sightings - the rest fade to a faint dot.
 function renderMarkers(plan) {
   markerLayer.clearLayers();
   if (viewMode === "tide") {

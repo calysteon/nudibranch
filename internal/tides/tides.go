@@ -1,5 +1,5 @@
 // Package tides talks to the NOAA CO-OPS API to fetch high/low tide
-// predictions and distills them into "daylight low tides" — the low tides that
+// predictions and distills them into "daylight low tides" - the low tides that
 // fall within human-friendly waking hours, which is when tidepooling is
 // actually feasible.
 //

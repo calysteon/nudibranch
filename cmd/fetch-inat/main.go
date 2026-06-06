@@ -9,7 +9,7 @@
 //	go run ./cmd/fetch-inat -beaches data/beaches.json -out data/species.json
 //
 // iNaturalist asks API users to stay under ~60 requests/minute; this tool
-// sleeps between pages to be a good citizen. Be patient — a full PNW pull can
+// sleeps between pages to be a good citizen. Be patient - a full PNW pull can
 // take a few minutes.
 package main
 

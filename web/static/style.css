@@ -287,6 +287,6 @@ body {
 @media (hover: none) {
   /* larger touch targets for species links */
   .sp { padding: 0.1rem 0; }
-  /* no hover on touch — keep the "zoom to beach" affordance visible */
+  /* no hover on touch - keep the "zoom to beach" affordance visible */
   .zoom-hint { opacity: 0.55; }
 }

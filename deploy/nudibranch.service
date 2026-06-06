@@ -24,7 +24,7 @@ ExecStart=/opt/nudibranch/nudibranch -addr 127.0.0.1:8080 -data /opt/nudibranch/
 Restart=on-failure
 RestartSec=3
 
-# Hardening — the service only needs to read its dir and write the tide cache.
+# Hardening - the service only needs to read its dir and write the tide cache.
 NoNewPrivileges=true
 ProtectSystem=strict
 ProtectHome=true

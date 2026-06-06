@@ -7,12 +7,12 @@ iNaturalist sightings.
 
 It correlates two free data sources:
 
-- **Tides** — [NOAA CO-OPS](https://tidesandcurrents.noaa.gov/) (no API key).
-- **Sea slug sightings** — [iNaturalist](https://www.inaturalist.org/) (no API key).
+- **Tides** - [NOAA CO-OPS](https://tidesandcurrents.noaa.gov/) (no API key).
+- **Sea slug sightings** - [iNaturalist](https://www.inaturalist.org/) (no API key).
 
 ## Design at a glance
 
-The expensive question — *which species at which beach in which month* — does
+The expensive question - *which species at which beach in which month* - does
 not change minute to minute, so it's **precomputed** offline by `cmd/fetch-inat`
 into `data/species.json`. A live request is then cheap: fetch the day's tide
 extremes from NOAA, keep the lows that land in waking hours, and join them with
@@ -28,7 +28,7 @@ web/            HTML template + vanilla JS + Leaflet map (no npm build)
 data/           beaches.json (curated) + species.json (sample; regenerate)
 ```
 
-The backend is **Go standard library only** — no third-party server
+The backend is **Go standard library only** - no third-party server
 dependencies, compiles to a single static binary. The only browser dependency
 is Leaflet, loaded from a CDN by default; run `make vendor` to host it locally.
 

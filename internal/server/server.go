@@ -133,7 +133,7 @@ func (s *Server) handlePlan(w http.ResponseWriter, r *http.Request) {
 	list := s.cfg.Beaches.InRegion(region)
 	results := make([]planBeach, len(list))
 
-	// Fan out the NOAA calls — each beach is independent. Cap concurrency so we
+	// Fan out the NOAA calls - each beach is independent. Cap concurrency so we
 	// stay polite to NOAA even when a region has many beaches.
 	const maxConcurrent = 6
 	sem := make(chan struct{}, maxConcurrent)

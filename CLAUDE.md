@@ -1,4 +1,4 @@
-# CLAUDE.md — project status, gaps, and roadmap
+# CLAUDE.md - project status, gaps, and roadmap
 
 Guidance for working in this repo, plus an honest accounting of what is built,
 what is **unverified**, and what is **missing**. Read the "Verification status"
@@ -27,7 +27,7 @@ internal/tides     NOAA client + DaylightLowTides() filter   <-- the core logic
 internal/species   Loads/serves the precomputed dataset
 internal/beaches   Curated beach list (coords + NOAA station id)
 web/               index.html template, app.js, style.css (Leaflet map)
-data/              beaches.json (curated), species.json (SAMPLE — regenerate)
+data/              beaches.json (curated), species.json (SAMPLE - regenerate)
 ```
 
 ## Commands
@@ -44,7 +44,7 @@ Always run `gofmt -w .` and `go vet ./...` before committing.
 
 ---
 
-## Verification status — READ THIS
+## Verification status - READ THIS
 
 This was built in a sandbox whose **network policy blocks outbound hosts**
 (`api.tidesandcurrents.noaa.gov` and `api.inaturalist.org` both return "Host not
@@ -75,7 +75,7 @@ here.** Here is exactly what is and isn't proven.
 
 ## What's missing / needs work (the punch list)
 
-### 1. NOAA tide integration — assumptions to confirm
+### 1. NOAA tide integration - assumptions to confirm
 - **Live call unproven.** The request in `tides.go:rawPredictions` uses
   `interval=hilo`, `datum=MLLW`, `time_zone=lst_ldt`, `units=english`,
   `format=json`. These are believed correct but must be confirmed against a
@@ -90,7 +90,7 @@ here.** Here is exactly what is and isn't proven.
 - **No rate limiting / retry/backoff** on NOAA calls. Add retry with backoff
   and a small client-side limiter if a region grows to many stations.
 
-### 2. Daylight window — currently a hard 08:00–20:00, not real daylight
+### 2. Daylight window - currently a hard 08:00–20:00, not real daylight
 - The "during waking hours" rule is a fixed `[wake-start, wake-end)` hour
   window (default 8–20). The user's actual intent is **sunlit hours**, which
   vary by date and latitude (PNW summer ≈ 5am–9pm, winter ≈ 8am–4:30pm).
@@ -98,7 +98,7 @@ here.** Here is exactly what is and isn't proven.
   ~40 lines, no deps) and filter lows to `max(wakeStart, sunrise) ..
   min(wakeEnd, sunset)`. Display sunrise/sunset in the UI.
 
-### 3. Species data — entirely a placeholder
+### 3. Species data - entirely a placeholder
 - `data/species.json` is **hand-written sample data** with `taxonId: 0` and
   invented counts. It only covers month 6 for most beaches (plus 4 & 12 for
   Alki) to demo seasonality.
@@ -106,8 +106,8 @@ here.** Here is exactly what is and isn't proven.
   in the UI is fictional.
 - The UI banner shows `speciesDataAt` ("sample data…") so this is visible.
 
-### 4. iNaturalist batch job — unproven assumptions
-- **Taxon ID `47113`** is assumed to be Nudibranchia — **verify** (open
+### 4. iNaturalist batch job - unproven assumptions
+- **Taxon ID `47113`** is assumed to be Nudibranchia - **verify** (open
   `inaturalist.org/taxa/47113`). Note nudibranchs are paraphyletic on iNat;
   consider also pulling sea slug sisters (e.g. include Aeolidida/Cladobranchia
   parents) if coverage looks thin.
@@ -120,9 +120,9 @@ here.** Here is exactly what is and isn't proven.
 - **Attribution model is naive:** each observation goes to the single nearest
   beach within `-radius` km (default 8). Beaches closer than 16 km apart will
   split/steal each other's sightings. Consider per-beach radius or de-dup.
-- No incremental updates — it refetches everything each run. Fine for now.
+- No incremental updates - it refetches everything each run. Fine for now.
 
-### 5. Beaches dataset — small and partly unverified
+### 5. Beaches dataset - small and partly unverified
 - Only **9 beaches** across 4 regions. Seattle cluster all map to station
   `9447130` (high confidence). Other stations (`9444090` Port Angeles,
   `9449880` Friday Harbor, `9449211` Bellingham) are believed correct but
@@ -132,27 +132,27 @@ here.** Here is exactly what is and isn't proven.
 - No per-beach substrate/quality metadata beyond a prose blurb.
 
 ### 6. Front-end gaps
-- **Not opened in a browser yet** — verify the map, markers, popups, and the
+- **Not opened in a browser yet** - verify the map, markers, popups, and the
   date picker actually work end-to-end.
 - Leaflet loads from the **unpkg CDN** (see `index.html`). For a no-third-party
   deploy, run `make vendor` and repoint the two tags at `/static/vendor/`.
   Consider adding Subresource Integrity (SRI) hashes if staying on the CDN.
 - No loading spinner beyond a "Loading…" text; no per-beach error toast; no
   mobile layout pass; no species photos (the `photoUrl` field exists but is
-  unused — `fetch-inat` doesn't populate it yet).
+  unused - `fetch-inat` doesn't populate it yet).
 - No "use my location" / geolocation; area selection is a fixed region dropdown.
 
 ### 7. Product features not yet built
 - **Sunrise/sunset display** and true-daylight filtering (see §2).
 - **Tide curve / multi-day view** ("show me the best low tides this week").
-- **Species detail** (photo, description, link) — currently just a name + iNat
+- **Species detail** (photo, description, link) - currently just a name + iNat
   link.
 - **Ranking/score** combining tide lowness + species richness into a single
   "go here" score.
 - Expansion beyond PNW (would need multi-timezone handling, see §1).
 
 ### 8. Operational / security
-- No HTTPS in-app — terminate TLS at nginx/Caddy (see `deploy/`).
+- No HTTPS in-app - terminate TLS at nginx/Caddy (see `deploy/`).
 - No request logging, metrics, or graceful shutdown on SIGTERM.
 - No CI workflow yet (add `go test ./...` + `go vet` on push).
 - `deploy/nudibranch.service` exists but is **untested on a real VPS**.
@@ -165,4 +165,4 @@ here.** Here is exactly what is and isn't proven.
 - No npm / node_modules / build step for the front-end. Vanilla JS + Leaflet.
 - Data shape changes must stay in sync across: `internal/species`,
   `cmd/fetch-inat` (`fileFormat`), and `data/species.json`.
-- Keep `data/species.json`'s `generatedAt` honest — it's shown to users.
+- Keep `data/species.json`'s `generatedAt` honest - it's shown to users.

@@ -12,7 +12,7 @@ site:
 	cp web/templates/index.html _site/index.html
 	cp -r web/static/. _site/static/
 	cp data/beaches.json data/species.json _site/data/
-	@echo "Built _site/ — preview: (cd _site && python3 -m http.server 8000)"
+	@echo "Built _site/ - preview: (cd _site && python3 -m http.server 8000)"
 
 # Run the server with the embedded sample data.
 run:
