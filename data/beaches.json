@@ -547,5 +547,158 @@
     "region": "Olympic Peninsula",
     "station": "9444555",
     "blurb": "Sheltered Sequim Bay park with a protected beach behind a natural spit."
+  },
+  {
+    "id": "seacrest",
+    "name": "Seacrest Park (Cove 2)",
+    "lat": 47.589,
+    "lon": -122.3793,
+    "region": "Seattle",
+    "station": "9447110",
+    "blurb": "Premier West Seattle shore-dive park on Elliott Bay \u2014 one of Puget Sound's most-logged nudibranch spots."
+  },
+  {
+    "id": "centennialpark",
+    "name": "Centennial Park (Seattle)",
+    "lat": 47.6179,
+    "lon": -122.3599,
+    "region": "Seattle",
+    "station": "9447130",
+    "blurb": "Downtown Seattle waterfront dive along the Elliott Bay seawall north of the piers."
+  },
+  {
+    "id": "smithcove",
+    "name": "Smith Cove",
+    "lat": 47.6299,
+    "lon": -122.3913,
+    "region": "Seattle",
+    "station": "9447130",
+    "blurb": "Sheltered cove by Elliott Bay Marina below Magnolia Bluff; popular easy shore dive."
+  },
+  {
+    "id": "threetreepoint",
+    "name": "Three Tree Point",
+    "lat": 47.456,
+    "lon": -122.3782,
+    "region": "Seattle",
+    "station": "9446248",
+    "blurb": "Rocky point south of Burien with a productive reef just offshore."
+  },
+  {
+    "id": "bremertonwaterfront",
+    "name": "Bremerton Waterfront",
+    "lat": 47.5639,
+    "lon": -122.6246,
+    "region": "Kitsap & Hood Canal",
+    "station": "9445958",
+    "blurb": "Port Washington Narrows shoreline at Bremerton; current-swept walls thick with invertebrates."
+  },
+  {
+    "id": "brownsville",
+    "name": "Brownsville",
+    "lat": 47.652,
+    "lon": -122.6145,
+    "region": "Kitsap & Hood Canal",
+    "station": "9445832",
+    "blurb": "Marina and pier on Port Orchard Bay \u2014 a classic Kitsap shore dive."
+  },
+  {
+    "id": "portorchard",
+    "name": "Port Orchard Waterfront",
+    "lat": 47.5424,
+    "lon": -122.6364,
+    "region": "Kitsap & Hood Canal",
+    "station": "9445958",
+    "blurb": "Sinclair Inlet waterfront in Port Orchard with gentle shore access."
+  },
+  {
+    "id": "poulsbo",
+    "name": "Poulsbo (Liberty Bay)",
+    "lat": 47.7332,
+    "lon": -122.6484,
+    "region": "Kitsap & Hood Canal",
+    "station": "9445719",
+    "blurb": "Liberty Bay waterfront at Poulsbo; sheltered muck diving rich in sea slugs."
+  },
+  {
+    "id": "rockaway",
+    "name": "Rockaway Beach (Bainbridge)",
+    "lat": 47.5991,
+    "lon": -122.4965,
+    "region": "Kitsap & Hood Canal",
+    "station": "9445913",
+    "blurb": "South Bainbridge reef ('Norrander's Reef') with dense invertebrate life."
+  },
+  {
+    "id": "blakelyharbor",
+    "name": "Blakely Harbor (Bainbridge)",
+    "lat": 47.5948,
+    "lon": -122.4785,
+    "region": "Kitsap & Hood Canal",
+    "station": "9445913",
+    "blurb": "Bainbridge harbor by Blakely Rock; popular boat and shore dive."
+  },
+  {
+    "id": "eagleharbor",
+    "name": "Eagle Harbor (Bainbridge)",
+    "lat": 47.6231,
+    "lon": -122.5109,
+    "region": "Kitsap & Hood Canal",
+    "station": "9445882",
+    "blurb": "Bainbridge ferry-terminal harbor with easy shore access to silty reefs."
+  },
+  {
+    "id": "vashonnorth",
+    "name": "Vashon North End",
+    "lat": 47.51,
+    "lon": -122.4641,
+    "region": "South Sound",
+    "station": "9446025",
+    "blurb": "North Vashon shoreline by the ferry dock facing Colvos Passage."
+  },
+  {
+    "id": "quartermaster",
+    "name": "Quartermaster Harbor (Vashon)",
+    "lat": 47.3724,
+    "lon": -122.454,
+    "region": "South Sound",
+    "station": "9446254",
+    "blurb": "Sheltered harbor between Vashon and Maury Islands; warm, slug-rich flats."
+  },
+  {
+    "id": "gigharbor",
+    "name": "Gig Harbor",
+    "lat": 47.3308,
+    "lon": -122.5806,
+    "region": "South Sound",
+    "station": "9446369",
+    "blurb": "Protected harbor with pilings and eelgrass; a reliable nudibranch muck dive."
+  },
+  {
+    "id": "foxisland",
+    "name": "Fox Island",
+    "lat": 47.239,
+    "lon": -122.633,
+    "region": "South Sound",
+    "station": "9446491",
+    "blurb": "Hale Passage shoreline by the Fox Island bridge; current-swept reef."
+  },
+  {
+    "id": "salmonbeach",
+    "name": "Salmon Beach (Tacoma)",
+    "lat": 47.2783,
+    "lon": -122.524,
+    "region": "South Sound",
+    "station": "9446486",
+    "blurb": "Tacoma Narrows shoreline below the bluff with a deep wall close to shore."
+  },
+  {
+    "id": "tacomawaterfront",
+    "name": "Tacoma Waterfront",
+    "lat": 47.2532,
+    "lon": -122.4445,
+    "region": "South Sound",
+    "station": "9446484",
+    "blurb": "Commencement Bay shoreline in Tacoma; an accessible urban dive."
   }
 ]

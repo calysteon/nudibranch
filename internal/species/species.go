@@ -13,11 +13,13 @@ import (
 
 // Species is one likely-to-be-seen sea slug at a beach in a given month.
 type Species struct {
-	CommonName string `json:"commonName"`
-	Scientific string `json:"scientific"`
-	Count      int    `json:"count"`   // historical observations near this beach in this month
-	TaxonID    int    `json:"taxonId"` // iNaturalist taxon id (for deep links)
-	PhotoURL   string `json:"photoUrl,omitempty"`
+	CommonName string  `json:"commonName"`
+	Scientific string  `json:"scientific"`
+	Count      int     `json:"count"`   // historical observations near this beach in this month
+	TaxonID    int     `json:"taxonId"` // iNaturalist taxon id (for deep links)
+	Lat        float64 `json:"lat"`     // mean latitude of this species' sightings near the beach
+	Lon        float64 `json:"lon"`     // mean longitude of this species' sightings near the beach
+	PhotoURL   string  `json:"photoUrl,omitempty"`
 }
 
 // Dataset maps beachID -> month ("1".."12") -> ranked species list.

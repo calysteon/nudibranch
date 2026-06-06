@@ -188,9 +188,27 @@ func (c *Client) rawPredictions(ctx context.Context, station, date string) ([]by
 	if err != nil {
 		return nil, fmt.Errorf("read tide response for station %s: %w", station, err)
 	}
-	if c.cacheDir != "" {
+	// Only cache genuine prediction payloads. NOAA occasionally returns a
+	// transient error (e.g. under load); caching that would poison the station
+	// for every future request until the cache is manually cleared.
+	if c.cacheDir != "" && isCacheablePredictions(b) {
 		path := filepath.Join(c.cacheDir, fmt.Sprintf("%s_%s.json", station, compact))
 		_ = os.WriteFile(path, b, 0o644)
 	}
 	return b, nil
+}
+
+// isCacheablePredictions reports whether a NOAA body is a real predictions
+// payload (at least one prediction, no error) and therefore safe to cache.
+func isCacheablePredictions(b []byte) bool {
+	var probe struct {
+		Predictions []json.RawMessage `json:"predictions"`
+		Error       *struct {
+			Message string `json:"message"`
+		} `json:"error"`
+	}
+	if err := json.Unmarshal(b, &probe); err != nil {
+		return false
+	}
+	return probe.Error == nil && len(probe.Predictions) > 0
 }

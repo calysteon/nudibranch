@@ -68,6 +68,24 @@ func TestDaylightLowTidesWiderWindowKeepsPreDawn(t *testing.T) {
 	}
 }
 
+func TestIsCacheablePredictions(t *testing.T) {
+	cases := []struct {
+		name string
+		body string
+		want bool
+	}{
+		{"valid predictions", sampleNOAA, true},
+		{"error payload", `{"error":{"message":"No Predictions data was found."}}`, false},
+		{"empty predictions", `{"predictions":[]}`, false},
+		{"garbage", `not json`, false},
+	}
+	for _, c := range cases {
+		if got := isCacheablePredictions([]byte(c.body)); got != c.want {
+			t.Errorf("%s: isCacheablePredictions = %v, want %v", c.name, got, c.want)
+		}
+	}
+}
+
 func TestDaylightLowTidesNOAAError(t *testing.T) {
 	c, srv := newTestClient(`{"error":{"message":"No data was found."}}`, http.StatusOK)
 	defer srv.Close()

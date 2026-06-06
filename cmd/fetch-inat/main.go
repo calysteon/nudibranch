@@ -143,6 +143,8 @@ type taxonTally struct {
 	scientific string
 	taxonID    int
 	count      int
+	sumLat     float64 // running sum of sighting coords, for a centroid
+	sumLon     float64
 }
 
 type aggregator struct {
@@ -197,6 +199,8 @@ func (a *aggregator) add(o inatObservation) {
 		a.data[nearest][month][o.Taxon.ID] = t
 	}
 	t.count++
+	t.sumLat += lat
+	t.sumLon += lng
 	a.attributed++
 }
 
@@ -215,12 +219,17 @@ func (a *aggregator) build(topN int) fileFormat {
 		for month, tallies := range byMonth {
 			list := make([]species.Species, 0, len(tallies))
 			for _, t := range tallies {
-				list = append(list, species.Species{
+				sp := species.Species{
 					CommonName: t.common,
 					Scientific: t.scientific,
 					Count:      t.count,
 					TaxonID:    t.taxonID,
-				})
+				}
+				if t.count > 0 {
+					sp.Lat = t.sumLat / float64(t.count)
+					sp.Lon = t.sumLon / float64(t.count)
+				}
+				list = append(list, sp)
 			}
 			sort.Slice(list, func(i, j int) bool { return list[i].Count > list[j].Count })
 			if len(list) > topN {

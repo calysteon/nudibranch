@@ -91,6 +91,40 @@ header {
 }
 #controls button[type="submit"]:hover { filter: brightness(1.05); }
 
+/* Segmented Slug / Tide view toggle. */
+.viewtoggle { display: inline-flex; border-radius: 7px; overflow: hidden; border: 1px solid var(--sea); align-self: flex-end; }
+.viewtoggle .vt {
+  font-size: 0.85rem;
+  padding: 0.42rem 0.7rem;
+  border: none;
+  background: rgba(255,255,255,0.92);
+  color: var(--sea-deep);
+  cursor: pointer;
+  font-weight: 600;
+}
+.viewtoggle .vt + .vt { border-left: 1px solid var(--sea); }
+.viewtoggle .vt.active { background: var(--sea); color: #fff; }
+
+/* Tide-of-day scrubber (shown in Tide view). */
+#tide-scrubber[hidden] { display: none; }
+#tide-scrubber {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.6rem;
+  flex-wrap: wrap;
+}
+#tide-scrubber label { font-size: 0.8rem; white-space: nowrap; }
+#tide-scrubber strong { color: #ffe1b3; font-variant-numeric: tabular-nums; }
+.hour-toggle { display: inline-flex; align-items: center; gap: 0.3rem; cursor: pointer; }
+.hour-toggle input { accent-color: var(--coral); cursor: pointer; }
+#tide-slider-group { display: inline-flex; align-items: center; gap: 0.5rem; flex: 1; min-width: 160px; max-width: 420px; transition: opacity 0.15s; }
+#tide-slider-group.disabled { opacity: 0.4; }
+#tide-time { flex: 1; min-width: 120px; accent-color: var(--coral); }
+#tide-scrubber-note { font-size: 0.75rem; opacity: 0.85; white-space: nowrap; }
+
 .hint { position: relative; z-index: 1; margin: 0.5rem 0 0; font-size: 0.75rem; opacity: 0.85; }
 
 main { flex: 1; display: flex; min-height: 0; }
@@ -116,6 +150,10 @@ main { flex: 1; display: flex; min-height: 0; }
 }
 .beach.no-tide { opacity: 0.62; }
 .beach h3 { margin: 0 0 0.2rem; font-size: 1.05rem; display: flex; align-items: center; gap: 0.4rem; }
+.beach-title { cursor: pointer; }
+.beach-title:hover { color: var(--sea); }
+.zoom-hint { margin-left: auto; font-size: 0.95rem; opacity: 0; transition: opacity 0.15s; color: var(--sea); }
+.beach-title:hover .zoom-hint { opacity: 0.85; }
 .swatch { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 0 0 1px rgba(0,0,0,0.15); }
 .beach .blurb { margin: 0 0 0.4rem; font-size: 0.8rem; color: #555; }
 
@@ -234,6 +272,10 @@ body {
   #controls label { flex: 1 1 8rem; }
   #controls select, #controls input { width: 100%; }
   #controls button[type="submit"] { flex: 1 1 5rem; min-height: 44px; }
+  .viewtoggle { width: 100%; }
+  .viewtoggle .vt { flex: 1; min-height: 44px; }
+  #tide-scrubber { gap: 0.4rem; }
+  #tide-time { min-height: 28px; }
 
   .sp-photo img { width: 52px; height: 52px; }
   .sp-name { font-size: 0.95rem; }
@@ -245,4 +287,6 @@ body {
 @media (hover: none) {
   /* larger touch targets for species links */
   .sp { padding: 0.1rem 0; }
+  /* no hover on touch — keep the "zoom to beach" affordance visible */
+  .zoom-hint { opacity: 0.55; }
 }
