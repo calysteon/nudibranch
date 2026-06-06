@@ -8,16 +8,26 @@ spike is that the CDN gets busy, never a surprise bill.
 
 ## One-time setup
 
-1. Push this branch to GitHub (it already has `.github/workflows/pages.yml`).
+1. Push to `main` (the repo already has `.github/workflows/pages.yml`, which
+   triggers on `main`).
 2. In the repo on github.com: **Settings → Pages → Build and deployment →
-   Source: GitHub Actions**.
+   Source: GitHub Actions**.  (NOT "Deploy from a branch" — this site is
+   assembled by the workflow, so a plain branch deploy would 404.)
 3. The repo must be **public** (or you need GitHub Pro for private Pages).
+4. On the **Actions** tab, open the latest "Deploy to GitHub Pages" run and
+   re-run it if it failed before Pages was enabled.
 
-That's it. Every push to the default branch rebuilds and republishes the site.
+That's it. Every push to `main` rebuilds and republishes the site.
 
 Your site will be at:
 
-    https://calysteon.github.io/Nudibranch/
+    https://calysteon.github.io/nudibranch.github.io/
+
+(This is a *project* site, so it lives at a subpath — the repo is owned by
+`calysteon`, not by an org named `nudibranch`. To get the root
+`https://nudibranch.github.io/` instead, the repo would need to be owned by a
+user/org literally named `nudibranch`. All asset paths are relative, so either
+works.)
 
 (The `Actions` tab shows each deploy; the green check links to the live URL.)
 

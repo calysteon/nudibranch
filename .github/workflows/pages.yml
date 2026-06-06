@@ -8,8 +8,6 @@ on:
   push:
     branches:
       - main
-      - master
-      - claude/nifty-noether-lFP0Q
   workflow_dispatch:
 
 permissions:
