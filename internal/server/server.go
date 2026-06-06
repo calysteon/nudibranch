@@ -25,6 +25,7 @@ var pacific = mustLoadZone("America/Los_Angeles")
 // Config holds everything the server needs to run.
 type Config struct {
 	WebFS         fs.FS
+	DataFS        fs.FS // serves beaches.json/species.json at /data/ for the static front-end
 	Beaches       *beaches.Set
 	Species       *species.Dataset
 	Tides         *tides.Client
@@ -53,6 +54,11 @@ func New(cfg Config) (*Server, error) {
 		return nil, err
 	}
 	s.mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.FS(static))))
+	if cfg.DataFS != nil {
+		// The static front-end fetches the datasets directly, mirroring how they
+		// are served on a static host (e.g. GitHub Pages).
+		s.mux.Handle("/data/", http.StripPrefix("/data/", http.FileServer(http.FS(cfg.DataFS))))
+	}
 	s.mux.HandleFunc("/api/plan", s.handlePlan)
 	s.mux.HandleFunc("/healthz", func(w http.ResponseWriter, r *http.Request) { _, _ = w.Write([]byte("ok")) })
 	s.mux.HandleFunc("/", s.handleIndex)

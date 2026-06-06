@@ -3,6 +3,9 @@
 /fetch-inat
 *.exe
 
+# Assembled static site (built by `make site` / the Pages workflow)
+/_site/
+
 # NOAA tide response cache
 /tidecache/
 

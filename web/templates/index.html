@@ -5,40 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Nudibranch! Where Are you? — Pacific Northwest tidepool planner</title>
 
-  <!-- Leaflet for the map. Loaded from CDN for now; see scripts/vendor.sh to
-       pull these files local for a fully self-hosted, no-CDN deploy. -->
+  <!-- Leaflet for the map (CDN). All other assets and data are local/static. -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-  <link rel="stylesheet" href="/static/style.css">
+  <!-- Relative paths so the site works at a domain root or a Pages subpath. -->
+  <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
   <header>
     <div class="banner-art" aria-hidden="true">
-      <img src="/static/img/drawn/flabellinopsis_iodinea.png" alt="">
-      <img src="/static/img/drawn/dendronotus_venustus.png" alt="">
-      <img src="/static/img/drawn/acanthodoris_rhodoceras.png" alt="">
-      <img src="/static/img/drawn/doto_columbiana.png" alt="">
-      <img src="/static/img/drawn/cerberilla_mosslandica.png" alt="">
-      <img src="/static/img/drawn/onchidoris_bilamellata.png" alt="">
-      <img src="/static/img/drawn/tenellia_columbiana.png" alt="">
-      <img src="/static/img/drawn/flabellinopsis_iodinea.png" alt="">
-      <img src="/static/img/drawn/dendronotus_venustus.png" alt="">
-      <img src="/static/img/drawn/doto_columbiana.png" alt="">
+      <img src="static/img/drawn/flabellinopsis_iodinea.png" alt="">
+      <img src="static/img/drawn/dendronotus_venustus.png" alt="">
+      <img src="static/img/drawn/acanthodoris_rhodoceras.png" alt="">
+      <img src="static/img/drawn/doto_columbiana.png" alt="">
+      <img src="static/img/drawn/cerberilla_mosslandica.png" alt="">
+      <img src="static/img/drawn/onchidoris_bilamellata.png" alt="">
+      <img src="static/img/drawn/tenellia_columbiana.png" alt="">
+      <img src="static/img/drawn/flabellinopsis_iodinea.png" alt="">
+      <img src="static/img/drawn/dendronotus_venustus.png" alt="">
+      <img src="static/img/drawn/doto_columbiana.png" alt="">
     </div>
-    <img class="corner-logo" src="/static/img/drawn/diaulula_odonoghuei.png" alt="A drawn nudibranch (Diaulula odonoghuei)">
+    <img class="corner-logo" src="static/img/drawn/diaulula_odonoghuei.png" alt="A drawn nudibranch (Diaulula odonoghuei)">
     <div class="brand">
       <h1>Nudibranch! <span class="brand-sub">Where Are you?</span></h1>
     </div>
     <form id="controls">
       <label>Area
-        <select id="region" name="region">
-          {{range .Regions}}<option value="{{.}}"{{if eq . $.DefaultRegion}} selected{{end}}>{{.}}</option>{{end}}
-          <option value="all">All PNW</option>
-        </select>
+        <select id="region" name="region"></select>
       </label>
       <label>Date
-        <input type="date" id="date" name="date" value="{{.DefaultDate}}">
+        <input type="date" id="date" name="date">
       </label>
       <button type="submit">Plan</button>
       <div class="viewtoggle" role="group" aria-label="Map view mode">
@@ -54,7 +51,7 @@
       </span>
       <span id="tide-scrubber-note"></span>
     </div>
-    <p class="hint">Showing daylight low tides between {{printf "%02d" .WakeStart}}:00 and {{printf "%02d" .WakeEnd}}:00.</p>
+    <p class="hint">Showing daylight low tides between 08:00 and 20:00.</p>
   </header>
 
   <main>
@@ -71,6 +68,6 @@
     Sightings via <a href="https://www.inaturalist.org/">iNaturalist</a>.
   </footer>
 
-  <script src="/static/app.js"></script>
+  <script src="static/app.js"></script>
 </body>
 </html>

@@ -123,9 +123,10 @@ function inatLink(s) {
 }
 
 // slugImg builds the local thumbnail URL for a species from its scientific name
-// ("Aeolidia loui" -> "/static/slugs/aeolidia_loui.jpg").
+// ("Aeolidia loui" -> "static/slugs/aeolidia_loui.jpg"). The path is relative so
+// the site works both at a domain root and on a GitHub Pages project subpath.
 function slugImg(scientific) {
-  return "/static/slugs/" + scientific.toLowerCase().replace(/\s+/g, "_") + ".jpg";
+  return "static/slugs/" + scientific.toLowerCase().replace(/\s+/g, "_") + ".jpg";
 }
 
 // beachColor returns a stable identity color for a beach, derived from its id so
@@ -402,19 +403,150 @@ function addSlugPins(b, color) {
   }
 }
 
-async function loadPlan() {
-  const params = new URLSearchParams({
-    region: regionSel.value,
-    date: dateInput.value,
+// --- client-side data + NOAA tides (no backend needed) ---
+//
+// This app is fully static: the precomputed beach/species datasets are plain
+// JSON files, and tide predictions come straight from NOAA's keyless, CORS-
+// enabled API in the browser. That lets the whole thing be hosted on a static
+// CDN (e.g. GitHub Pages) with no server.
+
+const WAKE_START = 8; // earliest waking hour for a usable low tide (inclusive)
+const WAKE_END = 20; // latest waking hour (exclusive)
+const TIDE_CONCURRENCY = 6; // polite parallelism for NOAA calls
+
+let BEACHES = [];
+let SPECIES = { generatedAt: "", beaches: {} };
+const tideCache = new Map(); // "station|date" -> Promise<Extreme[]>
+
+// fetchExtremes pulls a station's high/low predictions for a date from NOAA and
+// normalizes them into the same shape the old Go backend produced. Results are
+// cached per station+date so beaches that share a station only fetch once.
+function fetchExtremes(station, date) {
+  const key = station + "|" + date;
+  if (tideCache.has(key)) return tideCache.get(key);
+  const compact = date.replace(/-/g, "");
+  const url =
+    "https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?product=predictions&application=nudibranch" +
+    `&begin_date=${compact}&end_date=${compact}&datum=MLLW&station=${station}` +
+    "&time_zone=lst_ldt&interval=hilo&units=english&format=json";
+  const p = fetch(url)
+    .then((res) => {
+      if (!res.ok) throw new Error(`NOAA returned ${res.status}`);
+      return res.json();
+    })
+    .then((j) => {
+      if (j.error) throw new Error(j.error.message);
+      if (!j.predictions || j.predictions.length === 0) throw new Error("no predictions");
+      return j.predictions
+        .map((p) => {
+          const clock = (p.t.split(" ")[1] || "");
+          const [hh, mm] = clock.split(":").map(Number);
+          const h = parseFloat(p.v);
+          return { time: clock, minutes: hh * 60 + mm, heightFt: h, kind: p.type, minus: p.type === "L" && h < 0 };
+        })
+        .sort((a, b) => a.minutes - b.minutes);
+    });
+  tideCache.set(key, p);
+  return p;
+}
+
+function daylightLows(extremes, wakeStart, wakeEnd) {
+  return extremes
+    .filter((e) => e.kind === "L" && Math.floor(e.minutes / 60) >= wakeStart && Math.floor(e.minutes / 60) < wakeEnd)
+    .map((e) => ({ time: e.time, heightFt: e.heightFt, minus: e.minus }))
+    .sort((a, b) => a.heightFt - b.heightFt);
+}
+
+// mapLimit runs an async fn over items with bounded concurrency.
+async function mapLimit(items, limit, fn) {
+  const out = new Array(items.length);
+  let i = 0;
+  async function worker() {
+    while (i < items.length) {
+      const idx = i++;
+      out[idx] = await fn(items[idx], idx);
+    }
+  }
+  await Promise.all(Array.from({ length: Math.min(limit, items.length) }, worker));
+  return out;
+}
+
+// buildPlan assembles the same structure the old /api/plan endpoint returned,
+// entirely in the browser.
+async function buildPlan(region, date) {
+  const beaches = region === "all" ? BEACHES : BEACHES.filter((b) => b.region === region);
+  const month = parseInt(date.split("-")[1], 10);
+
+  const results = await mapLimit(beaches, TIDE_CONCURRENCY, async (b) => {
+    const entry = { ...b, lowTides: [], allTides: [], hasLowTide: false, species: [] };
+    try {
+      const ex = await fetchExtremes(b.station, date);
+      entry.allTides = ex;
+      const lows = daylightLows(ex, WAKE_START, WAKE_END);
+      if (lows.length > 0) {
+        entry.lowTides = lows;
+        entry.bestTide = lows[0];
+        entry.hasLowTide = true;
+        entry.species = (SPECIES.beaches[b.id] && SPECIES.beaches[b.id][String(month)]) || [];
+      }
+    } catch (err) {
+      entry.tideError = err.message;
+    }
+    return entry;
   });
-  summary.textContent = "Loading…";
+
+  results.sort((a, b) => {
+    if (a.hasLowTide !== b.hasLowTide) return a.hasLowTide ? -1 : 1;
+    if (a.hasLowTide) return a.bestTide.heightFt - b.bestTide.heightFt;
+    return 0;
+  });
+
+  return {
+    region,
+    date,
+    month,
+    wakeStart: WAKE_START,
+    wakeEnd: WAKE_END,
+    speciesDataAt: SPECIES.generatedAt,
+    beaches: results,
+  };
+}
+
+async function loadPlan() {
+  summary.textContent = "Loading tides…";
   try {
-    const res = await fetch("/api/plan?" + params.toString());
-    if (!res.ok) throw new Error(await res.text());
-    render(await res.json());
+    render(await buildPlan(regionSel.value, dateInput.value));
   } catch (err) {
     summary.textContent = "Failed to load plan: " + err.message;
   }
 }
 
-loadPlan();
+function todayStr() {
+  const t = new Date();
+  return `${t.getFullYear()}-${String(t.getMonth() + 1).padStart(2, "0")}-${String(t.getDate()).padStart(2, "0")}`;
+}
+
+// init loads the static datasets, fills the region/date controls, then plans.
+async function init() {
+  summary.textContent = "Loading…";
+  try {
+    const [beaches, species] = await Promise.all([
+      fetch("data/beaches.json").then((r) => r.json()),
+      fetch("data/species.json").then((r) => r.json()),
+    ]);
+    BEACHES = beaches;
+    SPECIES = species;
+
+    const regions = [...new Set(BEACHES.map((b) => b.region))].sort();
+    regionSel.innerHTML =
+      regions.map((r) => `<option value="${r}"${r === "Seattle" ? " selected" : ""}>${r}</option>`).join("") +
+      `<option value="all">All PNW</option>`;
+    if (!dateInput.value) dateInput.value = todayStr();
+
+    loadPlan();
+  } catch (err) {
+    summary.textContent = "Failed to load data: " + err.message;
+  }
+}
+
+init();

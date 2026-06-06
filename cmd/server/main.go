@@ -49,8 +49,18 @@ func main() {
 		log.Fatalf("load species: %v", err)
 	}
 
+	// A filesystem rooted at the JSON files themselves, served at /data/ so the
+	// static front-end can fetch them the same way it does on GitHub Pages.
+	httpDataFS := dataFS
+	if *dataDir == "" {
+		if sub, subErr := fs.Sub(dataFS, "data"); subErr == nil {
+			httpDataFS = sub
+		}
+	}
+
 	srv, err := server.New(server.Config{
 		WebFS:         nudibranch.WebFS,
+		DataFS:        httpDataFS,
 		Beaches:       beachSet,
 		Species:       speciesSet,
 		Tides:         tides.New(*cacheDir),

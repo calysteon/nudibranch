@@ -1,0 +1,48 @@
+name: Deploy to GitHub Pages
+
+# Builds the static site (HTML + assets + JSON datasets) and publishes it to
+# GitHub Pages. No server is needed: the browser fetches tide predictions from
+# NOAA's keyless, CORS-enabled API directly.
+
+on:
+  push:
+    branches:
+      - main
+      - master
+      - claude/nifty-noether-lFP0Q
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment; newer pushes cancel in-progress ones.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Assemble static site
+        run: |
+          mkdir -p _site/static _site/data
+          cp web/templates/index.html _site/index.html
+          cp -r web/static/. _site/static/
+          cp data/beaches.json data/species.json _site/data/
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
