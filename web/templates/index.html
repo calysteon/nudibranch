@@ -41,10 +41,6 @@
         <input type="date" id="date" name="date" value="{{.DefaultDate}}">
       </label>
       <button type="submit">Plan</button>
-      <div class="viewtoggle" role="group" aria-label="Map view mode">
-        <button type="button" class="vt active" data-view="beach">Beach view</button>
-        <button type="button" class="vt" data-view="slug">Slug view</button>
-      </div>
     </form>
     <p class="hint">Showing daylight low tides between {{printf "%02d" .WakeStart}}:00 and {{printf "%02d" .WakeEnd}}:00.</p>
   </header>

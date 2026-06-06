@@ -46,15 +46,12 @@ header {
 
 .corner-logo {
   position: absolute;
-  top: 0.6rem;
+  top: 0.5rem;
   right: 0.8rem;
-  height: 58px;
-  width: 58px;
-  object-fit: cover;
-  border-radius: 50%;
-  background: var(--sand);
-  padding: 3px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+  height: 76px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 5px rgba(0,0,0,0.4));
   z-index: 2;
 }
 
@@ -93,20 +90,6 @@ header {
   font-weight: 600;
 }
 #controls button[type="submit"]:hover { filter: brightness(1.05); }
-
-/* Segmented Beach / Slug view toggle. */
-.viewtoggle { display: inline-flex; border-radius: 7px; overflow: hidden; border: 1px solid var(--sea); align-self: flex-end; }
-.viewtoggle .vt {
-  font-size: 0.85rem;
-  padding: 0.42rem 0.7rem;
-  border: none;
-  background: rgba(255,255,255,0.92);
-  color: var(--sea-deep);
-  cursor: pointer;
-  font-weight: 600;
-}
-.viewtoggle .vt + .vt { border-left: 1px solid var(--sea); }
-.viewtoggle .vt.active { background: var(--sea); color: #fff; }
 
 .hint { position: relative; z-index: 1; margin: 0.5rem 0 0; font-size: 0.75rem; opacity: 0.85; }
 
@@ -243,16 +226,14 @@ body {
     overflow-y: visible;
   }
 
-  .corner-logo { height: 46px; width: 46px; top: 0.5rem; right: 0.5rem; }
-  .brand h1 { font-size: 1.25rem; padding-right: 3rem; }
-  .banner-art { padding-right: 3rem; opacity: 0.13; }
+  .corner-logo { height: 58px; width: auto; top: 0.4rem; right: 0.5rem; }
+  .brand h1 { font-size: 1.25rem; padding-right: 4.5rem; }
+  .banner-art { padding-right: 4.5rem; opacity: 0.13; }
 
   #controls { gap: 0.5rem; }
   #controls label { flex: 1 1 8rem; }
   #controls select, #controls input { width: 100%; }
   #controls button[type="submit"] { flex: 1 1 5rem; min-height: 44px; }
-  .viewtoggle { width: 100%; }
-  .viewtoggle .vt { flex: 1; min-height: 44px; }
 
   .sp-photo img { width: 52px; height: 52px; }
   .sp-name { font-size: 0.95rem; }

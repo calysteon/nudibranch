@@ -19,9 +19,6 @@ const list = document.getElementById("beach-list");
 const summary = document.getElementById("summary");
 const dataNote = document.getElementById("data-note");
 
-// View state: "beach" (one dot per beach, colored by tide) or
-// "slug" (one image-pin per species sighting, ringed in the beach's color).
-let viewMode = "beach";
 let currentPlan = null;
 
 form.addEventListener("submit", (e) => {
@@ -29,19 +26,10 @@ form.addEventListener("submit", (e) => {
   loadPlan();
 });
 
-document.querySelectorAll(".viewtoggle .vt").forEach((btn) => {
-  btn.addEventListener("click", () => {
-    if (btn.dataset.view === viewMode) return;
-    viewMode = btn.dataset.view;
-    document.querySelectorAll(".viewtoggle .vt").forEach((b) => b.classList.toggle("active", b === btn));
-    if (currentPlan) renderMarkers(currentPlan);
-  });
-});
-
-// Slug-view pins are offset around their beach in screen pixels, so re-lay them
-// out whenever the zoom level changes.
+// Slug pins are offset around their beach in screen pixels, so re-lay them out
+// whenever the zoom level changes.
 map.on("zoomend", () => {
-  if (viewMode === "slug" && currentPlan) renderMarkers(currentPlan);
+  if (currentPlan) renderMarkers(currentPlan);
 });
 
 function inatLink(s) {
@@ -239,38 +227,11 @@ function render(plan) {
   }
 }
 
-// renderMarkers redraws the map layer for the active view mode.
+// renderMarkers redraws the map: each species sighting becomes an image pin,
+// ringed in its beach's identity color and offset around the beach point.
 function renderMarkers(plan) {
   markerLayer.clearLayers();
-  if (viewMode === "slug") renderSlugMarkers(plan);
-  else renderBeachMarkers(plan);
-}
-
-// Beach view: one dot per beach, colored by tide quality.
-function renderBeachMarkers(plan) {
-  for (const b of plan.beaches) {
-    const color = b.hasLowTide ? (b.bestTide && b.bestTide.minus ? "#b8324a" : "#11707f") : "#999";
-    const marker = L.circleMarker([b.lat, b.lon], {
-      radius: b.hasLowTide ? 9 : 6,
-      color: "#fff",
-      weight: 1.5,
-      fillColor: color,
-      fillOpacity: 0.9,
-    });
-
-    let popup = `<strong>${b.name}</strong>`;
-    if (b.hasLowTide) {
-      popup += `<br>Low tide: ${b.lowTides.map((t) => `${t.time} (${t.heightFt.toFixed(1)} ft)`).join(", ")}`;
-      popup += `<br>${speciesList(b.species)}`;
-    } else if (b.tideError) {
-      popup += `<br><em>tide data unavailable</em>`;
-    } else {
-      popup += `<br><em>no daylight low tide</em>`;
-    }
-    marker.bindPopup(popup, { maxWidth: 260 });
-    marker.on("click", () => scrollToBeach(b));
-    marker.addTo(markerLayer);
-  }
+  renderSlugMarkers(plan);
 }
 
 // Slug view: each species sighting becomes an image pin, ringed in its beach's
